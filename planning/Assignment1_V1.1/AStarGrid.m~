@@ -136,8 +136,7 @@ while true
         n = neighbors(m);
         if(map(n)~=2 && map(n)~=3 && map(n)~=5)
             map(n) = 4;
-            g(n) = g(current) + 1; % each vertex length is equal
-            f(n) = g(n) + H(n);
+            distanceFromStart(n) = min([distanceFromStart(n), min_dist + 1]); % each vertex length is equal
             parent(n) = current;
         end;
     end;
