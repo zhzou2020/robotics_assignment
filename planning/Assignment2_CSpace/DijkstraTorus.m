@@ -72,7 +72,6 @@ while true
     
     % Update map
     map(current) = 3;         % mark current node as visited
-    cur_dist = distances(current);
     distances(current) = Inf; % remove this node from further consideration
     
     % Compute row, column coordinates of current node
@@ -84,13 +83,13 @@ while true
     %%% All of your code should be between the two lines of stars. 
     % *******************************************************************
     row=mod(i,nrows)+1;
-    update(row,j,cur_dist+1,current);
+    update(row,j,min_dist+1,current);
     row=mod(i-2,nrows)+1;
-    update(row,j,cur_dist+1,current);
+    update(row,j,min_dist+1,current);
     col=mod(j,ncols)+1;
-    update(i,col,cur_dist+1,current);
+    update(i,col,min_dist+1,current);
     col=mod(j-2,ncols)+1;
-    update(i,col,cur_dist+1,current);
+    update(i,col,min_dist+1,current);
     
     % *******************************************************************
 end
