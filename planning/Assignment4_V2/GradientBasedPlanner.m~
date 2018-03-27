@@ -15,6 +15,9 @@ route = zeros(max_its, 2);
 
 %%% All of your code should be between the two lines of stars.
 % *******************************************************************
+gx = gx./norm([gx, gy]);
+gy = gy./norm([gx, gy]);
+
 route(1, :) = start_coords;
 pos = start_coords;
 it = 1;
@@ -23,7 +26,7 @@ while (it < max_its && norm(end_coords - pos) > 2.0)
     it = it + 1;
     
     Delta = [gx(round(pos(2)), round(pos(1))), gy(round(pos(2)), round(pos(1)))];
-    pos = pos + Delta / norm(Delta);
+    pos = pos + Delta;
     
     route(it, :) = pos;
 end
