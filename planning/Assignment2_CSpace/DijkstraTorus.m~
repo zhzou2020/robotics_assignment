@@ -72,7 +72,6 @@ while true
     
     % Update map
     map(current) = 3;         % mark current node as visited
-    cur_dist = distances(current);
     distances(current) = Inf; % remove this node from further consideration
     
     % Compute row, column coordinates of current node
@@ -83,6 +82,28 @@ while true
    
     %%% All of your code should be between the two lines of stars. 
     % *******************************************************************
+    neighbors = [];
+
+    if(i>1)
+        neighbors = [neighbors; i-1 j];
+    end
+
+    if(i<nrows)
+        neighbors = [neighbors; i+1 j];
+    end
+
+    if(j>1)
+        neighbors = [neighbors; i j-1];
+    end
+
+    if(j<ncols)
+        neighbors = [neighbors; i j+1];
+    end
+
+    [r, c] = size(neighbors);
+    
+    for m = 1 : c
+        n = neighbors(m);
     row=mod(i,nrows)+1;
     update(row,j,cur_dist+1,current);
     row=mod(i-2,nrows)+1;
