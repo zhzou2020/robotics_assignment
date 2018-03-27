@@ -116,7 +116,7 @@ while true
         neighbors = [neighbors sub2ind(size(map), i, j+1)];
     end;
 
-    [r, c] = size(neighbors)
+    [r, c] = size(neighbors);
     
     for m = 1 : c
         n = neighbors(m);
