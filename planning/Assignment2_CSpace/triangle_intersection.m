@@ -17,7 +17,7 @@ for i = 1:3
     for j=1:3
         v3 = P2(j, :);
         if (j == 3)
-            v4 = P2(1, :)
+            v4 = P2(1, :);
         else
             v4 = P2(j+1, :);
         end
