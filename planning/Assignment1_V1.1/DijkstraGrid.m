@@ -116,11 +116,14 @@ while true
         neighbors = [neighbors sub2ind(size(map), i, j+1)];
     end;
 
-    for m = 1 : size(neighbors)
-        n = neighbors[m];
-        if(n~=2 && n~=3)
+    [r, c] = size(neighbors)
+    
+    for m = 1 : c
+        n = neighbors(m);
+        display(n);
+        if(map(n)~=2 && map(n)~=3 && map(n)~=5)
             map(n) = 4;
-            distanceFromStart(n) = min([distanceFromStart(n), min_dist + 1); % each vertex length is equal
+            distanceFromStart(n) = min([distanceFromStart(n), min_dist + 1]); % each vertex length is equal
             parent(n) = current;
         end;
     end;
