@@ -120,7 +120,6 @@ while true
     
     for m = 1 : c
         n = neighbors(m);
-        display(n);
         if(map(n)~=2 && map(n)~=3 && map(n)~=5)
             map(n) = 4;
             distanceFromStart(n) = min([distanceFromStart(n), min_dist + 1]); % each vertex length is equal
