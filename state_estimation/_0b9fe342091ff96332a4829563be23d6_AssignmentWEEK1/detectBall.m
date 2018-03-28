@@ -17,15 +17,19 @@ function [segI, loc] = detectBall(I)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Hard code your learned model parameters here
 %
-% mu = 
-% sig = 
-% thre = 
-
+mu = [149.2171 143.9402 61.2023];
+sig = [180.1341 133.2750 340.6981];
+thre = 1e-07;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Find ball-color pixels using your model
 % 
-
+p = zeros(120, 160);
+for i = 1:120
+    for j = 1:160
+        p(i,j) = mvnpdf(double([I(i,j,1) I(i,j,2) I(i,j,3)]), mu, sig) > thre;
+    end
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Do more processing to segment out the right cluster of pixels.
@@ -33,15 +37,16 @@ function [segI, loc] = detectBall(I)
 %   bwconncomp
 %   regionprops
 % Please see example_bw.m if you need an example code.
+segI = zeros(120, 160);
 
+CC = bwconncomp(p);
+numPixels = cellfun(@numel, CC.PixelIdxList);
+[~, idx] = max(numPixels);
+segI(CC.PixelIdxList{idx}) = true; 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Compute the location of the ball center
-%
+S = regionprops(CC, 'Centroid');
+loc = S(idx).Centroid; 
 
-% segI = 
-% loc = 
-% 
 % Note: In this assigment, the center of the segmented ball area will be considered for grading. 
 % (You don't need to consider the whole ball shape if the ball is occluded.)
 

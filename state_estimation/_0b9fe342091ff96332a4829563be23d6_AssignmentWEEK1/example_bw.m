@@ -15,7 +15,7 @@ bw_biggest = false(size(bw));
 CC = bwconncomp(bw);
 numPixels = cellfun(@numel,CC.PixelIdxList);
 [biggest,idx] = max(numPixels);
-bw_biggest(CC.PixelIdxList{idx}) = true; 
+bw_biggest(CC.PixelIdxList{idx}) = true;
 figure,
 imshow(bw_biggest); hold on;
 

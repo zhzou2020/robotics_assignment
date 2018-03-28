@@ -49,3 +49,14 @@ zlabel('Blue');
 % the sample data.
 %
 
+D = 3;
+u = zeros(D, 1);
+sigma = zeros(D, 1);
+
+for i = 1:D
+    u(i, 1) = mean(Samples(:, i));
+    sigma(i, 1) = cov(Samples(:, i));
+end
+
+disp(u)
+disp(sigma);
