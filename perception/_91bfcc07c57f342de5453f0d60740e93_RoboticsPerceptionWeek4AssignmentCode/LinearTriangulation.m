@@ -14,5 +14,19 @@ function X = LinearTriangulation(K, C1, R1, C2, R2, x1, x2)
 %     X - size (N x 3) matrix whos rows represent the 3D triangulated
 %       points
 
+% x1 = K * (R1 * X + C1)
+% x2 = K * (R2 * X + C2)
 
+n = size(x1, 1);
+X = zeros(n,3);
 
+for i = 1:n
+    x_1 = Vec2Skew([x1(i,1); x1(i,2); 1]);
+    x_2 = Vec2Skew([x2(i,1); x2(i,2); 1]);
+    A = [x_1 * K * [R1 -R1 * C1]; x_2 * K * [R2 -R2*C2]];
+    [~, ~, V] = svd(A);
+    X_b = V(1:3,end) / V(end,end);
+    X(i, :) = X_b.';
+end
+
+end
