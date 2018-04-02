@@ -12,8 +12,19 @@ function [proj_points, t, R] = ar_cube(H,render_points,K)
 %    R - size (3 x 3) matrix of the rotation of the transformation
 % Written by Stephen Phillips for the Coursera Robotics:Perception course
 
-% YOUR CODE HERE: Extract the pose from the homography
+% Extract the pose from the homography
+h1 = H(:,1);
+h2 = H(:,2);
+h3 = cross(h1, h2);
+[U, ~, V] = svd([h1 h2 h3]);
 
-% YOUR CODE HERE: Project the points using the pose
+R = U * [1 0 0; 0 1 0; 0 0 det(U * V')] * V';
+t = H(:,3) / norm(h1);
+
+% Project the points using the pose
+proj_points = K * (R * render_points.' + t); % 3 x N
+proj_points = proj_points(1:2, :) ./ proj_points(3, :);
+
+proj_points = proj_points.';
 
 end
