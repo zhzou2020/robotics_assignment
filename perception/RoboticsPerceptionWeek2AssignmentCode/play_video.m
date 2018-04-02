@@ -18,4 +18,3 @@ for i=1:num_ima
 end
 
 end
-
